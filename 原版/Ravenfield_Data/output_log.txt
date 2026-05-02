@@ -1,0 +1,50 @@
+Initialize engine version: 5.4.0f3 (a6d8d714de6f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 6000 (ID=0x1626)
+    Vendor:   Intel
+    VRAM:     1159 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Pathfinding.ClipperLib.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Pathfinding.ClipperLib.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Pathfinding.JsonFx.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Pathfinding.JsonFx.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Pathfinding.Poly2Tri.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\Pathfinding.Poly2Tri.dll into Unity Child Domain
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\EasyRoads3D.dll (this message is harmless)
+Loading F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\EasyRoads3D.dll into Unity Child Domain
+- Completed reload, in  0.264 seconds
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: F:\叫你看了吗\Ravenfield\Ravenfield_Data\Managed\System.dll (this message is harmless)
+desktop: 1440x900 60Hz; virtual: 1440x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 2.547840 ms
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 13.402880 ms
+
+Unloading 22 unused Assets to reduce memory usage. Loaded Objects now: 4448.
+Total: 8.723200 ms (FindLiveObjects: 0.423680 ms CreateObjectMapping: 0.707200 ms MarkObjects: 6.206080 ms  DeleteObjects: 1.382400 ms)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: c0c -> priority: 1 
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 8.707200 ms
+
+Unloading 39 unused Assets to reduce memory usage. Loaded Objects now: 22785.
+Total: 51.673599 ms (FindLiveObjects: 2.768000 ms CreateObjectMapping: 1.832960 ms MarkObjects: 39.245441 ms  DeleteObjects: 7.822721 ms)
+

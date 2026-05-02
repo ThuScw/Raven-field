@@ -1,88 +1,81 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
 namespace RavenfieldAIEnhancement
 {
+    public static class Version
+    {
+        public const string NAME = "AI Enhancement V6";
+        public const string VERSION = "6.0.0";
+        public const int BUILD = 1;
+    }
+
     public static class AIEnhancementAutoStart
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         public static void OnGameStart()
         {
-            Debug.Log("[AIEnhancementV3] Advanced AI System loading...");
+            Debug.Log("[AIEnhancementV6] Loading...");
             try
             {
-                GameObject initObject = new GameObject("AIEnhancementV3");
-                UnityEngine.Object.DontDestroyOnLoad(initObject);
-                initObject.AddComponent<AIEnhancementMain>();
-                Debug.Log("[AIEnhancementV3] System active!");
+                GameObject rootObject = new GameObject("AIEnhancementV6");
+                rootObject.AddComponent<TargetingEnhancer>();
+                UnityEngine.Object.DontDestroyOnLoad(rootObject);
+                Debug.Log("[AIEnhancementV6] Active!");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[AIEnhancementV3] Failed: " + ex.Message);
+                Debug.LogError("[AIEnhancementV6] Failed: " + ex.Message);
             }
         }
     }
 
-    public class AIEnhancementMain : MonoBehaviour
+    public class TargetingEnhancer : MonoBehaviour
     {
-        void Awake()
-        {
-            GameObject updater = new GameObject("AIThreatUpdaterV3");
-            updater.transform.SetParent(transform);
-            updater.AddComponent<AIThreatUpdaterV3>();
+        private const float UPDATE_INTERVAL = 0.2f;
+        private const float SWITCH_THRESHOLD = 5f;
+        private const float BASE_DISTANCE = 1000f;
+        private const float AIMING_BONUS = 500f;
+        private const float VEHICLE_TARGET_BONUS = 300f;
+        private const float ARMORED_TARGET_BONUS = 200f;
+        private const float AIR_TARGET_BONUS = 150f;
+        private const float PREFERRED_WEAPON_BONUS = 100f;
+        private const float EFFECTIVE_WEAPON_BONUS = 50f;
+        private const float INEFFECTIVE_WEAPON_PENALTY = 200f;
+        private const float LOW_HEALTH_BONUS = 50f;
+        private const float PLAYER_TARGET_BONUS = 30f;
 
-            GameObject spawnManager = new GameObject("AISpawnManager");
-            spawnManager.transform.SetParent(transform);
-            spawnManager.AddComponent<AISpawnManager>();
-
-            GameObject vehicleAI = new GameObject("AIVehicleEnhancer");
-            vehicleAI.transform.SetParent(transform);
-            vehicleAI.AddComponent<AIVehicleEnhancer>();
-
-            GameObject pathOptimizer = new GameObject("AIPathOptimizerV4");
-                pathOptimizer.transform.SetParent(transform);
-                pathOptimizer.AddComponent<AIPathOptimizerV4>();
-
-            GameObject styleSystem = new GameObject("AICombatStyleSystem");
-            styleSystem.transform.SetParent(transform);
-            styleSystem.AddComponent<AICombatStyleSystem>();
-        }
-    }
-
-    public class AIThreatUpdaterV3 : MonoBehaviour
-    {
-        private float updateInterval = 0.2f;
         private float timer = 0f;
         private static MethodInfo setTargetMethod;
-        private static bool reflectionInitialized = false;
+        private static bool initialized = false;
 
-        void Start()
+        void Awake()
         {
             InitializeReflection();
         }
 
         private void InitializeReflection()
         {
-            if (reflectionInitialized) return;
+            if (initialized) return;
             try
             {
                 Type aiType = typeof(AiActorController);
                 setTargetMethod = aiType.GetMethod("SetTarget", BindingFlags.Instance | BindingFlags.NonPublic);
-                reflectionInitialized = true;
+                initialized = true;
+                Debug.Log("[AIEnhancementV6] Targeting system ready");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[AIEnhancementV3] Reflection init failed: " + ex.Message);
+                Debug.LogError("[AIEnhancementV6] Reflection failed: " + ex.Message);
             }
         }
 
         void Update()
         {
             timer += Time.deltaTime;
-            if (timer >= updateInterval)
+            if (timer >= UPDATE_INTERVAL)
             {
                 timer = 0f;
                 ProcessAllAI();
@@ -97,23 +90,24 @@ namespace RavenfieldAIEnhancement
                 List<Actor> allActors = ActorManager.instance.actors;
                 if (allActors == null) return;
 
-                foreach (var actor in allActors)
+                for (int i = 0; i < allActors.Count; i++)
                 {
+                    Actor actor = allActors[i];
                     if (actor == null || actor.dead || !actor.aiControlled) continue;
 
                     AiActorController ai = actor.controller as AiActorController;
                     if (ai == null) continue;
 
-                    EnhanceAITargeting(ai);
+                    ImproveTargeting(ai);
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError("[AIEnhancementV3] Process error: " + ex.Message);
+                Debug.LogError("[AIEnhancementV6] Error: " + ex.Message);
             }
         }
 
-        private void EnhanceAITargeting(AiActorController ai)
+        private void ImproveTargeting(AiActorController ai)
         {
             Actor self = ai.actor;
             if (self == null) return;
@@ -125,12 +119,12 @@ namespace RavenfieldAIEnhancement
             Actor bestTarget = null;
             float bestScore = -99999f;
 
-            foreach (var enemy in enemies)
+            for (int i = 0; i < enemies.Count; i++)
             {
+                Actor enemy = enemies[i];
                 if (enemy == null || enemy.dead || enemy == self) continue;
 
-                float score = CalculatePriorityScore(self, enemy);
-
+                float score = CalculateTargetScore(self, enemy);
                 if (score > bestScore)
                 {
                     bestScore = score;
@@ -140,20 +134,20 @@ namespace RavenfieldAIEnhancement
 
             if (bestTarget != null && bestTarget != currentTarget)
             {
-                float currentScore = currentTarget != null ? CalculatePriorityScore(self, currentTarget) : -99999f;
-                if (bestScore > currentScore + 5f)
+                float currentScore = currentTarget != null ? CalculateTargetScore(self, currentTarget) : -99999f;
+                if (bestScore > currentScore + SWITCH_THRESHOLD)
                 {
-                    SetTargetInternal(ai, bestTarget);
+                    SetTarget(ai, bestTarget);
                 }
             }
         }
 
-        private float CalculatePriorityScore(Actor self, Actor enemy)
+        private float CalculateTargetScore(Actor self, Actor enemy)
         {
             float score = 0f;
             float distance = Vector3.Distance(self.Position(), enemy.Position());
 
-            score += 1000f - distance;
+            score += BASE_DISTANCE - distance;
 
             if (enemy.IsAiming())
             {
@@ -163,19 +157,19 @@ namespace RavenfieldAIEnhancement
 
                 if (enemy.Velocity().magnitude < 0.1f || alignment > 0.2f)
                 {
-                    score += 500f;
+                    score += AIMING_BONUS;
                 }
             }
 
             if (enemy.IsSeated())
             {
-                score += 300f;
+                score += VEHICLE_TARGET_BONUS;
 
                 Actor.TargetType targetType = enemy.GetTargetType();
                 if (targetType == Actor.TargetType.Armored)
-                    score += 200f;
+                    score += ARMORED_TARGET_BONUS;
                 else if (targetType == Actor.TargetType.Air)
-                    score += 150f;
+                    score += AIR_TARGET_BONUS;
             }
 
             Weapon myWeapon = self.activeWeapon;
@@ -187,29 +181,29 @@ namespace RavenfieldAIEnhancement
                 switch (effectiveness)
                 {
                     case Weapon.Effectiveness.Preferred:
-                        score += 100f;
+                        score += PREFERRED_WEAPON_BONUS;
                         break;
                     case Weapon.Effectiveness.Yes:
-                        score += 50f;
+                        score += EFFECTIVE_WEAPON_BONUS;
                         break;
                     case Weapon.Effectiveness.No:
-                        score -= 200f;
+                        score -= INEFFECTIVE_WEAPON_PENALTY;
                         break;
                 }
             }
 
             float healthPercent = enemy.health / 100f;
-            score += (1f - Mathf.Clamp01(healthPercent)) * 50f;
+            score += (1f - Mathf.Clamp01(healthPercent)) * LOW_HEALTH_BONUS;
 
             if (enemy == ActorManager.instance.player)
             {
-                score += 30f;
+                score += PLAYER_TARGET_BONUS;
             }
 
             return score;
         }
 
-        private void SetTargetInternal(AiActorController ai, Actor target)
+        private void SetTarget(AiActorController ai, Actor target)
         {
             if (setTargetMethod == null) return;
             try
@@ -226,10 +220,13 @@ namespace RavenfieldAIEnhancement
             if (allActors == null) return null;
 
             List<Actor> enemies = new List<Actor>();
-            foreach (var actor in allActors)
+            for (int i = 0; i < allActors.Count; i++)
             {
+                Actor actor = allActors[i];
                 if (actor != null && !actor.dead && actor.team != myTeam)
+                {
                     enemies.Add(actor);
+                }
             }
             return enemies;
         }

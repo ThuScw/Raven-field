@@ -28,7 +28,7 @@ class Injector
             }
         };
 
-        string gameManaged = @"c:\Users\86134\Desktop\AI-zone\Ravenfield\Ravenfield_Data\Managed";
+        string gameManaged = @"c:\Users\86134\Desktop\AI-zone\Raven-field\Ravenfield_Data\Managed";
         string targetDll = Path.Combine(gameManaged, "Assembly-CSharp.dll");
         string backupPath = Path.Combine(gameManaged, "Assembly-CSharp.dll.backup");
         string enhancementDll = Path.Combine(gameManaged, "AIEnhancement.dll");

@@ -1,0 +1,1492 @@
+=== RAVENFIELD TYPE ANALYSIS ===
+Total types: 764
+
+=== Actor ===
+Base: Hurtable
+
+-- Fields --
+  public ActorController controller
+  public ActiveRaggy ragdoll
+  public Animator animator
+  public Boolean autoMoveActor
+  public Rigidbody hipRigidbody
+  public Rigidbody headRigidbody
+  public Single deathTimestamp
+  public Single health
+  public Single balance
+  public Boolean dead
+  public Boolean fallenOver
+  private Collider[] hitboxColliders
+  private ActorIk ik
+  private Vector2 movement
+  private Vector3 parentOffset
+  private Transform originalParent
+  private Action fallAction
+  private Action stopFallAction
+  private Action getupAction
+  private Action highlightAction
+  private Action hurtAction
+  private Boolean wasCrouching
+  public Boolean inWater
+  public Weapon activeWeapon
+  public Weapon[] weapons
+  private Int32 activeWeaponSlot
+  public Int32[] spareAmmo
+  private Boolean wasFiring
+  private Boolean aiming
+  private Action aimingAction
+  public Boolean hasAmmoBox
+  public Int32 ammoBoxSlot
+  public Boolean hasMedipack
+  public Int32 medipackSlot
+  public Boolean aiControlled
+  public Boolean needsResupply
+  public Seat seat
+  private Action cannotEnterVehicleAction
+  public SkinnedMeshRenderer skinnedRenderer
+  public SkinnedMeshRenderer skinnedRendererRagdoll
+  private Boolean lqUpdate
+  private Single lastUpdate
+  private Single nextLqUpdateTime
+  public Single lqUpdatePhase
+  private Rigidbody rigidbody
+  private static Vector3 removePitchEuler
+  private static Vector3 removeY
+  private static Single MOVEMENT_LERP_SPEED
+  private static Single TURN_MOVEMENT_FORWARD_SLERP
+  private static Single CLAMP_FACING_ANGLE
+  private static Single OFFSET_RETURN_SPEED
+  private static Single GETUP_HEIGHT_PADDING
+  private static Single PROJECT_TO_GROUND_THRESHOLD
+  private static Single PROJECT_TO_GROUND_RADIUS
+  private static Single AUTO_MOVE_FALL_PROJECT_DISTANCE
+  private static Single RAGDOLL_DRIVE_SPRING
+  private static Single RAGDOLL_DRIVE_DAMPING
+  private static Single RAGDOLL_DEAD_DRIVE_SPRING
+  private static Single RAGDOLL_DEAD_DRIVE_DAMPING
+  private static Single BALANCE_GAIN_PER_SECOND
+  public static Single CULL_ANIMATOR_DISTANCE
+  public static Single LQ_CAMERA_DISTANCE
+  public static Single LQ_UPDATE_RATE
+  private static Int32 AIM_ANIMATION_LAYER
+  private static Int32 CROUCH_ANIMATION_LAYER
+  private static Int32 RAGDOLL_ANIMATION_LAYER
+  private static Single SWIM_SPEED
+  public Int32 team
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  public Void Awake()
+  public Void Start()
+  public Boolean IsAiming()
+  public Void SpawnAt(Vector3 position)
+  private Void SpawnLoadoutWeapons()
+  private Void SwitchToFirstAvailableWeapon()
+  private Void SpawnWeapon(WeaponEntry entry, Int32 slotNumber)
+  public Void EmoteHail()
+  public Void EmoteRegroup()
+  public Void EmoteMove()
+  public Void EmoteHalt()
+  protected Void FixedUpdate()
+  public Void Update()
+  private Void UpdateWeapon()
+  private Void UpdateGetup()
+  public Single GetupProgress()
+  private Void UpdateFacing()
+  private Void UpdateMovement(Single dt)
+  private Void UpdateOffset(Single dt)
+  private Void UpdateRagdollStates()
+  public Void KnockOver(Vector3 force)
+  public Void ApplyRigidbodyForce(Vector3 force)
+  public Void FallOver()
+  private Void GetUp()
+  private Void InstantGetUp()
+  private Void Die(Vector3 impactForce)
+  public Vector3 Position()
+  public Vector3 CenterPosition()
+  public Vector3 Velocity()
+  public Boolean StandingStill()
+  public Boolean Damage(Single healthDamage, Single balanceDamage, Boolean piercing, Vector3 point, Vector3 direction, Vector3 impactForce)
+  public Void ApplyRecoil(Vector3 impulse)
+  public Vector3 WeaponMuzzlePosition()
+  private Void Unholster(Weapon weapon)
+  private Void HolsterActiveWeapon()
+  private Void DropWeapon(Weapon weapon)
+  public Boolean HasWeaponInSlot(Int32 i)
+  public Boolean HasUnholsteredWeapon()
+  public Void Highlight()
+  public Boolean IsHighlighted()
+  public Boolean IsSeated()
+  public Boolean IsPassenger()
+  public Boolean IsDriver()
+  public Boolean CanEnterSeat()
+  public Boolean EnterSeat(Seat seat)
+  public Void LeaveSeat()
+  private IEnumerator ReactivateCollisionsWith(Vehicle vehicle)
+  public Void NextWeapon()
+  public Void PreviousWeapon()
+  public Void SwitchWeapon(Int32 slot)
+  public Void SwitchSeat(Int32 targetSeat)
+  public Void Hurt(Single x)
+  public Void SetTeam(Int32 team)
+  private Boolean ControllingVehicle()
+  public Int32 RemainingSpareAmmoFor(Weapon weapon)
+  public Void UpdateAmmoUi()
+  public Void UpdateHealthUi()
+  public Int32 RemoveSpareAmmo(Int32 howmuch, Int32 slot)
+  public Void AmmoChanged()
+  public Void ResupplyAmmo()
+  public Boolean ResupplyHealth()
+  public Boolean IsLowQuality()
+  public TargetType GetTargetType()
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== AiActorController ===
+Base: ActorController
+
+-- Fields --
+  public Transform eyeTransform
+  public Transform weaponParent
+  private Quaternion facingDirection
+  private Quaternion targetFacingDirection
+  public Actor target
+  private Boolean hasPath
+  private Boolean calculatingPath
+  private Seeker seeker
+  private Path path
+  private Int32 waypoint
+  private Vector3 lastSeenTargetPosition
+  private Vector3 lastSeenTargetVelocity
+  private Boolean skipNextScan
+  private RadiusModifier radiusModifier
+  private AlternativePath alternatePathModifier
+  private Boolean fire
+  private Single randomTimeOffset
+  private Single fatigue
+  private Vector3 acquireTargetOffset
+  private Action acquireTargetAction
+  private List`1 closeActors
+  private CoverPoint cover
+  private Boolean inCover
+  private Action stayInCoverAction
+  private Single lean
+  private Action takingFireAction
+  public Vector3 takingFireDirection
+  private Vehicle targetVehicle
+  private Boolean forceAntiStuckReverse
+  private Boolean waitForPlayer
+  private Int32 recentAntiStuckEvents
+  private Boolean canTurnCarTowardsWaypoint
+  private List`1 avoidedVehicles
+  private Boolean aquatic
+  private Boolean flying
+  private Boolean hasFlightTarget
+  private Single helicopterTargetFlightHeight
+  private Vector3 flightTargetPosition
+  private Action helicopterAttackAction
+  private Action helicopterAttackCooldownAction
+  private Action helicopterTakeoffAction
+  private Action helicopterNewOrderAction
+  private Action sprintAction
+  private Action sprintCooldownAction
+  private Action ragdollAutokillAction
+  private Action moveTimeoutAction
+  private Single smoothNoisePhase
+  public Squad squad
+  public Boolean squadLeader
+  private Vector3 lastWaypoint
+  private Vector3 lastGotoPoint
+  private Boolean blockerAhead
+  private Vector3 blockerPosition
+  private static String[] primaryWeaponNames
+  private static String[] secondaryWeaponNames
+  private static String[] gearNames
+  private static AiParameters PARAMETERS_EASY
+  private static AiParameters PARAMETERS_NORMAL
+  private static Single AI_TICK_PERIOD
+  private static Single AI_KEEP_TARGET_TIME
+  private static Single AI_ORDER_PERIOD
+  private static Single AI_VEHICLE_PERIOD
+  private static Single MAX_VEHICLE_DISTANCE
+  private static Single SPRINT_DURATION_MIN
+  private static Single SPRINT_DURATION_MAX
+  private static Single SPRINT_COOLDOWN_MIN
+  private static Single SPRINT_COOLDOWN_MAX
+  private static Single NORMAL_WALK_SPEED
+  private static Single SPRINT_SPEED
+  private static Single HAS_TARGET_WALK_SPEED
+  private static Single VEHICLE_STUCK_DISTANCE
+  private static Single VEHICLE_STUCK_TIME
+  private static Single VEHICLE_STUCK_RECOVER_TIME
+  private static Single MAX_RECENT_ANTI_STUCK_EVENTS
+  private static Single ANTI_STUCK_EVENT_LIFETIME
+  private static Int32 CAR_UNEVEN_SURFACE_PENALTY
+  private static Single CAR_TARGET_MAX_SPEED
+  private static Single CAR_REVERSE_SPEED
+  private static Int32 GRAPH_MASK_ON_FOOT
+  private static Int32 GRAPH_MASK_BOAT
+  private static Int32 GRAPH_MASK_CAR
+  private static Single HELICOPTER_TARGET_FLIGHT_HEIGHT_MIN
+  private static Single HELICOPTER_TARGET_FLIGHT_HEIGHT_MAX
+  private static Single HELICOPTER_HEIGHT_EXTRAPOLATION_TIME
+  private static Single HELICOPTER_MAX_PITCH
+  private static Single HELICOPTER_MAX_ROLL
+  private static Single HELICOPTER_ATTACK_RANGE
+  private static Single TANK_PROJECTED_DRIVING_MIN_DISTANCE
+  private static Single TANK_PROJECTED_DRIVING_SPEED_GAIN
+  private static Single CAR_PROJECTED_DRIVING_MIN_DISTANCE
+  private static Single CAR_PROJECTED_DRIVING_SPEED_GAIN
+  private static Single CAR_PREDICTION_PROJECTED_DRIVING_MIN_DISTANCE
+  private static Single CAR_PREDICTION_PROJECTED_DRIVING_SPEED_GAIN
+  private static Single CAR_TURN_MULTIPLIER
+  private static Single TRANSPORT_EXIT_AND_WALK_MAX_DISTANCE
+  private static Single AI_WEAPON_FAST_TICK_PERIOD
+  private static Single AI_WEAPON_SLOW_TICK_PERIOD
+  private static Single AI_WEAPON_SLOW_TICK_DISTANCE
+  public static Single TAKING_FIRE_MAX_DISTANCE
+  private static Single FOOT_BLOCK_SPHERECAST_RADIUS
+  private static Single FOOT_CHECK_BLOCKER_AHEAD_RANGE
+  private static Int32 FOOT_BLOCK_MASK
+  private static Single VEHICLE_BLOCK_AHEAD_TIME
+  private static Single VEHICLE_BLOCK_AVOID_MULTIPLIER
+  private static Int32 VEHICLE_BLOCK_MASK
+  private static Single CAR_TURNING_SPEED_MULTIPLIER
+  private static Single CAR_DRIVING_FORWARD_TURN_MULTIPLIER
+  private static Single AI_MIN_SCAN_TIME
+  private static Single AI_MAX_SCAN_TIME
+  private static Single LOOK_FORWARD_CHANCE
+  private static Single AI_FACE_HIGHLIGHTED_DISTANCE
+  private static Single AI_FACE_HIGHLIGHTED_CHANCE
+  private static Single AI_CHASE_EXTRAPOLATION_TIME
+  private static Single AI_INVESTIGATE_MIN_TIME
+  private static Single AI_UPDATE_CLOSE_ACTORS_TIME
+  private static Single CLOSE_ACTORS_RANGE
+  private static Single LOCAL_AVOIDANCE_MIN_DISTANCE
+  private static Single LOCAL_AVOIDANCE_SPEED
+  private static Int32 FRIENDLY_LAYER_MASK
+  private static Int32 GROUND_LAYER_MASK
+  private static Single FATIGUE_GAIN
+  private static Single FATIGUE_DRAIN
+  private static Single AIM_SLERP_SPEED
+  private static Single AIM_CONSTANT_SPEED
+  private static Single MIN_GOTO_DELTA
+  private static Int32 CAN_SEE_RAYCAST_SAMPLES
+  private static Single FOV_MIN_DOT
+  private static Single WAYPOINT_COMPLETE_DISTANCE
+  private static Single WAYPOINT_COMPLETE_DISTANCE_LQ
+  private static Single WAYPOINT_COMPLETE_DISTANCE_VEHICLE
+  private static Single WAYPOINT_COMPLETE_DISTANCE_VEHICLE_AQUATIC
+  private static Single LEAN_SPEED
+  private static Single EYE_HEIGHT
+  private static Single MAX_ENTER_SEAT_DISTANCE
+  private static Single SELECT_NON_FRONTLINE_SPAWN_CHANCE
+  private static Single PLAYER_APPROACHING_DOT
+  private static Single PLAYER_APPROACHING_LOOK_DOT
+  private static Single PLAYER_APPROACHING_MAX_RANGE
+  private static Single GET_IN_PLAYER_VEHICLE_RANGE
+  public Actor actor
+
+-- Properties --
+  AiParameters PARAMETERS { get;  }
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  public static Void SetupParameters()
+  private Void Awake()
+  private List`1 FindPotentialTargets()
+  private Void StartAiCoroutines()
+  private IEnumerator AiBlocked()
+  private Boolean PlayerIsApproaching()
+  private IEnumerator AiVehicle()
+  private Void PushAntiStuckEvent()
+  private Void PopAntiStuckEvent()
+  private Boolean ShouldHavePath()
+  private Void CreateRougeSquad()
+  private IEnumerator AiOrders()
+  private IEnumerator AiTarget()
+  private Void StartSprint()
+  private Void StopSprint()
+  private Void SetTarget(Actor target)
+  private Void DropTarget()
+  private IEnumerator AiWeapon()
+  private IEnumerator AiTrack()
+  private IEnumerator AiScan()
+  private IEnumerator AiTrackClosestActors()
+  private Vector3 SquadFacingBias()
+  private Boolean HasEffectiveWeaponAgainst(Actor targetActor)
+  private Void LookAt(Vector3 position)
+  private Void LookDirection(Vector3 direction)
+  private Void OnPathComplete(Path p)
+  private Void RecalculatePath()
+  public Void Goto(Vector3 targetPoint)
+  public Void CancelPath()
+  private Vector3 GetTargetAcquireOffset()
+  private Void Update()
+  private Vector3 GetTargetAcquiredPosition()
+  private Boolean IsReloading()
+  private Boolean CoolingDown()
+  private Vector3 WeaponLead()
+  private Vector3 SmoothNoise(Single frequency)
+  public Single Lean()
+  public Boolean Fire()
+  public Boolean Aiming()
+  public Boolean Reload()
+  public Boolean OnGround()
+  public Boolean ProjectToGround()
+  private Vector3 GetWaypointDeltaBlockable()
+  private Vector3 GetWaypointDelta()
+  private Void NextWaypoint()
+  private Void NewWaypoint(Vector3 origin, Vector3 target)
+  private Void AvoidVehicle(Vehicle vehicle, Vector3 origin, Vector3 target, Single pathingRadius)
+  private Boolean RayPathClear(List`1 points, Int32 mask)
+  private Vector3 GetUpcomingBetweenWaypointsDelta()
+  private Vector3 GetNextWaypointDelta()
+  private Boolean LastWaypoint()
+  private Void PathDone()
+  public Vector3 Velocity()
+  public Vector3 SwimInput()
+  private Vector3 LocalAvoidanceVelocity()
+  public Vector2 BoatInput()
+  public Vector2 CarInput()
+  private Vector2 GetTankInput()
+  private Vector2 GetCarInput()
+  private Vector3 GetProjectedDrivingTarget(Single minDistance, Single speedGain, Vehicle vehicle)
+  private Vector3 GetFutureProjectedDrivingTarget(Single minDistance, Single speedGain, Vehicle vehicle)
+  public Vector4 HelicopterInput()
+  private Single Heading(Vector3 root, Vector3 target)
+  public Vector3 FacingDirection()
+  public Boolean UseMuzzleDirection()
+  public Void ReceivedDamage(Single damage, Single balanceDamage, Vector3 point, Vector3 direction, Vector3 force)
+  public Void DisableInput()
+  public Void EnableInput()
+  public Void StartSeated(Seat seat)
+  public Void EndSeated(Vector3 exitPosition, Quaternion flatFacing)
+  public Void StartRagdoll()
+  public Void GettingUp()
+  public Void EndRagdoll()
+  public Void Die()
+  public Boolean HasTarget()
+  private Boolean CanSeeActor(Actor target, Boolean considerFov)
+  public Void SpawnAt(Vector3 position)
+  public Void ApplyRecoil(Vector3 impulse)
+  public Boolean FindCover()
+  public Boolean FindCoverAtPoint(Vector3 point)
+  public Boolean FindCoverTowards(Vector3 direction)
+  public Void LeaveCover()
+  public Boolean HasCover()
+  public Boolean IsMovingToCover()
+  public Boolean InSquad()
+  public Void AssignedToSquad(Squad squad)
+  public Boolean IsSquadLeader()
+  public Boolean InCover()
+  public Void EmoteRegroup()
+  public Void EmoteMoveOrder(Vector3 target)
+  public Void EmoteHailLeaderSlow()
+  public Void EmoteHailPlayer()
+  public Void EmoteHailLeader()
+  public Void EmoteHalt()
+  public Void MarkTakingFireFrom(Vector3 direction)
+  public Boolean IsTakingFire()
+  public SpawnPoint SelectedSpawnPoint()
+  public Transform WeaponParent()
+  public Boolean HasTargetVehicle()
+  public Void GotoAndEnterVehicle(Vehicle vehicle)
+  public Void LeaveVehicle()
+  private List`1 NearbyNonFullVehicles()
+  public Void SwitchedToWeapon(Weapon weapon)
+  public Boolean Crouch()
+  public Void StartCrouch()
+  public Boolean EndCrouch()
+  public LoadoutSet GetLoadout()
+  private Void SwitchToPrimaryWeapon()
+  private Void SwitchToEffectiveWeapon(Actor target)
+  private Void OnGUI()
+  public Boolean IsGroupedUp()
+  public Boolean IsSprinting()
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== ActorManager ===
+Base: MonoBehaviour
+
+-- Fields --
+  public Single spawnTime
+  public Int32 team0Bots
+  public Int32 team1Bots
+  public GameObject actorPrefab
+  public SpawnPoint[] spawnPoints
+  public List`1 actors
+  public Actor player
+  public List`1 vehicles
+  public Boolean debug
+  private Dictionary`2 aliveActors
+  public static ActorManager instance
+  private static Int32 MIN_SQUAD_SIZE
+  private static Single MIN_DEAD_TIME
+  private static Single AI_MAX_FIRST_SPAWN_TIME
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  public static Void Register(Actor actor)
+  public static Void Drop(Actor actor)
+  private Void Awake()
+  private Void OnDestroy()
+  public Void StartGame()
+  private Void FillEmptySlotsWithAI()
+  private Void CreateAIActor(Int32 team, Single fillRatio)
+  private Void SpawnWave()
+  private IEnumerator SpawnActorList(List`1 actorsToSpawn)
+  public static Void SetAlive(Actor actor)
+  public static Void SetDead(Actor actor)
+  public static List`1 AliveActorsOnTeam(Int32 team)
+  public static SpawnPoint RandomSpawnPointForTeam(Int32 team)
+  public static SpawnPoint RandomFrontlineSpawnPointForTeam(Int32 team)
+  public static Boolean HasSpawnPoint(Int32 team)
+  public static SpawnPoint ClosestSpawnPoint(Vector3 position)
+  public static SpawnPoint RandomEnemySpawnPoint(Int32 team)
+  public static List`1 AliveActorsInRange(Vector3 point, Single range)
+  public static List`1 ActorsInRange(Vector3 point, Single range)
+  public static Void RegisterProjectile(Projectile p)
+  private IEnumerator MarkTakingFire(AiActorController ai, Vector3 direction, Single duration)
+  public static Void RegisterVehicle(Vehicle vehicle)
+  public static Void DropVehicle(Vehicle vehicle)
+  public static Boolean Explode(Vector3 point, ExplosionConfiguration configuration)
+  private Void OnLevelLoaded(Scene arg0, LoadSceneMode arg1)
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== Weapon ===
+Base: MonoBehaviour
+
+-- Fields --
+  public Actor user
+  protected Boolean userIsPlayer
+  public Transform thirdPersonTransform
+  public Vector3 thirdPersonOffset
+  public Single thirdPersonScale
+  public Configuration configuration
+  public AudioSource reverbAudio
+  public Sprite uiSprite
+  public Int32 ammo
+  public Boolean reloading
+  protected Single lastFired
+  protected Boolean holdingFire
+  public Boolean unholstered
+  protected AudioSource audio
+  protected Single weaponVolume
+  protected Action stopFireLoop
+  public Single projectileSpeed
+  public Animator animator
+  public Int32 slot
+  public Boolean aiming
+  private Boolean fireLoopPlaying
+  protected List`1 renderers
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  protected Void Awake()
+  protected Void Start()
+  public Void FindRenderers(Boolean thirdperson)
+  protected Void Update()
+  public Void Fire(Vector3 direction, Boolean useMuzzleDirection)
+  private Void StartFireLoop()
+  private Void StopFireLoop()
+  public Void StopFire()
+  public Void SetAiming(Boolean aiming)
+  public Void Reload(Boolean overrideHolstered)
+  protected Void ReloadDone()
+  protected Int32 RemoveSpareAmmo(Int32 count)
+  private Void AmmoChanged()
+  private Void DisableOverrideLayer()
+  private Void EnableOverrideLayer()
+  public Boolean CanFire()
+  public Boolean CoolingDown()
+  public Boolean AmmoFull()
+  protected Void Shoot(Vector3 direction, Boolean useMuzzleDirection)
+  private Void PlayReverbAudio()
+  private Void OnDestroy()
+  protected Boolean HasActiveAnimator()
+  protected Projectile SpawnProjectile(Vector3 direction)
+  public Void Hide()
+  public Void Show()
+  public Void CullFpsObjects()
+  public Boolean IsEmpty()
+  public Void Equip(Actor user)
+  public Void Drop()
+  public Void Unholster()
+  public Void UnholsterDone()
+  public Void Holster()
+  public Effectiveness EffectivenessAgainst(TargetType targetType)
+  public Vector3 MuzzlePosition()
+  public Boolean EffectiveAtRange(Single range)
+  public Boolean AllowsResupply()
+  public Boolean HasSpareAmmo()
+  public Boolean HasLoadedAmmo()
+  public Boolean HasAnyAmmo()
+  public Boolean HasInfiniteSpareAmmo()
+  public Int32 GetSpareAmmo()
+  public Void AssignFpAudioMix()
+  public Boolean IsToggleable()
+  public Boolean CanBeAimed()
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== Vehicle ===
+Base: MonoBehaviour
+
+-- Fields --
+  public TargetType targetType
+  public Seat[] seats
+  public Int32 ownerTeam
+  public Int32 seatsClaimedByBots
+  public Boolean claimedByPlayer
+  public Boolean stuck
+  private Action takingFireAction
+  public Single maxHealth
+  public Single crashDamageSpeedThrehshold
+  public Single crashDamageMultiplier
+  public Single spotChanceMultiplier
+  public Single burnTime
+  public Boolean crashSkipsBurn
+  public Boolean directJavelinPath
+  public Boolean exitWhenTakingFire
+  private Single health
+  public Boolean dead
+  public Rigidbody rigidbody
+  private VehicleSpawner spawner
+  public ParticleSystem damageParticles
+  public ParticleSystem burnParticles
+  public ParticleSystem deathParticles
+  public AudioSource fireAlarm
+  public Transform blockSensor
+  protected AudioSource audio
+  public AudioSource explosionSound
+  public AudioSource impactAudio
+  public AudioSource heavyDamageAudio
+  public Texture blip
+  public Vector2 avoidanceSize
+  public Single pathingRadius
+  public Vector3 ramSize
+  public Vector3 ramOffset
+  private Single avoidanceCoarseRadius
+  private Boolean reportedFirstDriver
+  public Collider[] colliders
+  private Vector3 blockSensorOrigin
+  private Action cannotRamAction
+  private Action crashDamageCooldown
+  private Action drainClaimAction
+  public Boolean burning
+  private Int32 stopBurningRepairs
+  private static RaycastHit[] ramResults
+  private static Single HEAVY_DAMAGE_THRESHOLD
+  private static Int32 RAM_MASK
+  private static Single EXPLODE_TIME
+  private static Single CLEANUP_TIME
+  public static Int32 LAYER
+  private static Single AUTO_DAMAGE_START_TIME
+  private static Single AUTO_DAMAGE_PERIOD
+  private static Single AUTO_DAMAGE_PERCENT
+  private static Single RAM_MIN_SPEED
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  public Boolean HasDriver()
+  public Actor Driver()
+  public Void MarkTakingFire()
+  protected Void Awake()
+  private Void CheckRam()
+  protected Void FixedUpdate()
+  public Void OccupantEntered(Seat seat)
+  public Void ClaimSeat()
+  public Void DropSeatClaim()
+  public Boolean HasUnclaimedSeats()
+  public Void OccupantLeft(Seat seat, Actor leaver)
+  private Void AutoDamage()
+  protected Void DriverEntered()
+  protected Void DriverExited()
+  public Void Damage(Single amount)
+  protected Void StartBurning()
+  private Void StopBurning()
+  public Boolean Repair(Single amount)
+  public Void Die()
+  private Void OnCollisionEnter(Collision c)
+  protected Void Explode()
+  private Void Cleanup()
+  public Vector3 Velocity()
+  public Vector3 LocalVelocity()
+  public Void SetSpawner(VehicleSpawner spawner)
+  protected static Vector2 Clamp2(Vector2 v)
+  protected static Vector4 Clamp4(Vector4 v)
+  public Seat GetEmptySeat()
+  public Int32 EmptySeats()
+  public Boolean IsFull()
+  public Boolean IsEmpty()
+  public Boolean HasBlockSensor()
+  public Int32 BlockTest(Collider[] outColliders, Single extrapolationTime, Int32 mask)
+  public Boolean CoarseLineOverlap(Vector3 origin, Vector3 target, Single lineRadius)
+  public Boolean IsCoarseOverlapping(Vector3 point, Single lineRadius)
+  public Boolean IsStill()
+  public Boolean ShouldBeAvoided()
+  public Single GetHealthRatio()
+  protected Void HeavyDamage()
+  public Boolean AiShouldEnter()
+  private Void OnGUI()
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== GameManager ===
+Base: MonoBehaviour
+
+-- Fields --
+  public Boolean ingame
+  public Boolean spectating
+  public GameObject ingameUiPrefab
+  public GameObject playerPrefab
+  public Boolean reverseMode
+  public Boolean assaultMode
+  public Boolean nightMode
+  public Boolean noVehicles
+  public Int32 victoryPoints
+  public AudioMixerGroup fpMixerGroup
+  public GameObject spectatorCameraPrefab
+  private Single gameStartTime
+  public static GameManager instance
+  public static Int32 MENU_LEVEL_INDEX
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  private Void Awake()
+  private Void OnDestroy()
+  private Void Start()
+  private Void OnLevelLoaded(Scene scene, LoadSceneMode mode)
+  private Void OnLevelIndexLoaded(Int32 levelIndex)
+  private Boolean IngameLevel(Int32 level)
+  private Void StartGame()
+  private Void OpenPlayerLoadout()
+  public Single ElapsedGameTime()
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== Squad ===
+Base: Object
+
+-- Fields --
+  private AiActorController leader
+  public List`1 members
+  public Boolean hasAssignedOrder
+  public State state
+  public Vehicle squadVehicle
+  public Int32 number
+  public SpawnPoint targetSpawnPoint
+  private Single readyTime
+  private Boolean groupedUp
+  private Boolean hasSquadVehicle
+  private Int32 recentTakingFireEvents
+  private static Int32 nextNumber
+  private static Single GROUPED_UP_DISTANCE
+
+-- Properties --
+
+-- Methods --
+  public Boolean Ready()
+  public Void DropMember(AiActorController a)
+  public AiActorController Leader()
+  public Actor GetTarget()
+  public Boolean HasTargetSpawnPoint()
+  public Boolean ShouldGotoSpawnPoint(SpawnPoint spawnPoint)
+  public SpawnPoint ClosestSpawnPoint()
+  public Void NewAttackOrder()
+  public Void ReissueAttackOrder()
+  public Void AttackSpawnPoint(SpawnPoint spawnPoint)
+  public Void MoveTo(Vector3 point)
+  public Void MoveToAndDigIn(Vector3 point)
+  public Void DigIn()
+  public Void DigInTowards(Vector3 direction)
+  public Void SetAlreadyInVehicle(Vehicle vehicle)
+  public Void EnterVehicle(Vehicle vehicle)
+  public Void ExitVehicle()
+  public Boolean IsTakingFire()
+  public Boolean AllSeated()
+  public Boolean HasVehicle()
+  private Void LeaveAnyCover()
+  private Void Disband()
+  public Boolean IsGroupedUp()
+  public Void Update()
+  private Void UpdateGroupedUpFlag()
+  private Void UpdateVehicleStatus()
+  public Squad SplitSquad(List`1 leavingMembers)
+  public Boolean MemberNeedsResupply()
+  public Boolean MemberNeedsHealth()
+  public Void MakeLeader(AiActorController member)
+  public Boolean Equals(Object obj)
+  public Int32 GetHashCode()
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+  public String ToString()
+
+=== SquadManager: NOT FOUND ===
+
+=== SpawnPoint ===
+Base: MonoBehaviour
+
+-- Fields --
+  public Int32 owner
+  public Int32 maxSquadSize
+  public List`1 adjacentSpawnPoints
+  public Transform spawnpointContainer
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  protected Void Awake()
+  public Vector3 GetSpawnPosition()
+  public Vector3 RandomPosition()
+  public Vector3 RandomSpawnPointPosition()
+  public Boolean IsSafe()
+  public Single GotoRadius()
+  public Boolean IsFrontLine()
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== SpawnManager: NOT FOUND ===
+
+=== AiController: NOT FOUND ===
+
+=== CoverPoint ===
+Base: MonoBehaviour
+
+-- Fields --
+  public Type type
+  public Boolean taken
+  private static Single COS_MAX_COVER_ANGLE
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  public Boolean CoversDirection(Vector3 direction)
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== CoverManager ===
+Base: MonoBehaviour
+
+-- Fields --
+  private CoverPoint[] coverPoints
+  public static CoverManager instance
+  private static Single MAX_COVER_DISTANCE
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  public Void Awake()
+  public Void StartGame()
+  public CoverPoint ClosestVacant(Vector3 point)
+  public CoverPoint ClosestVacantCoveringDirection(Vector3 point, Vector3 direction)
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== Loadout: NOT FOUND ===
+
+=== Seat ===
+Base: MonoBehaviour
+
+-- Fields --
+  public Vehicle vehicle
+  public Type type
+  public SitAnimation animation
+  public Boolean enclosed
+  public Vector3 exitOffset
+  public MountedWeapon weapon
+  public Actor occupant
+  public GameObject hud
+  public Single maxOccupantBalance
+  public static Int32 LAYER
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  public Boolean IsOccupied()
+  public Void SetOccupant(Actor actor)
+  public Void OccupantLeft()
+  private Void Update()
+  public Boolean CanUseWeapon()
+  public Boolean HasMountedWeapon()
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+

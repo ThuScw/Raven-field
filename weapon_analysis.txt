@@ -1,0 +1,209 @@
+=== AiActorController+<AiWeapon>c__Iterator9A ===
+Base: Object
+
+-- Fields --
+  protected Vector3 <muzzlePosition>__0
+  protected Vector3 <deltaTarget>__1
+  protected Single <distance>__2
+  protected Vector3 <forward>__3
+  protected Vector3 <orth1>__4
+  protected Vector3 <orth2>__5
+  protected Single <a>__6
+  protected Single <b>__7
+  protected Single <allowedAimSpread>__8
+  protected Boolean <insideAimCube>__9
+  protected Ray <friendlyRay>__10
+  protected RaycastHit <hitInfo>__11
+  protected Int32 $PC
+  protected Object $current
+  protected AiActorController <>f__this
+
+-- Properties --
+  Object System.Collections.Generic.IEnumerator<object>.Current { get;  }
+  Object System.Collections.IEnumerator.Current { get;  }
+
+-- Methods --
+  public Boolean MoveNext()
+  public Void Dispose()
+  public Void Reset()
+  public Boolean Equals(Object obj)
+  public Int32 GetHashCode()
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+  public String ToString()
+
+=== Weapon+Configuration ===
+Base: Object
+
+-- Fields --
+  public Boolean auto
+  public Int32 ammo
+  public Int32 spareAmmo
+  public Int32 resupplyNumber
+  public Single reloadTime
+  public Single cooldown
+  public Single unholsterTime
+  public Single aimFov
+  public Boolean forceAutoReload
+  public Boolean loud
+  public Boolean forceWorldAudioOutput
+  public Transform muzzle
+  public ParticleSystem muzzleFlash
+  public ParticleSystem casing
+  public Int32 projectilesPerShot
+  public GameObject projectilePrefab
+  public Single kickback
+  public Single randomKick
+  public Single spread
+  public Single snapMagnitude
+  public Single snapDuration
+  public Single snapFrequency
+  public Boolean aiIgnoreFriendlies
+  public Single aiAllowedAimSpread
+  public Effectiveness effInfantry
+  public Effectiveness effInfantryGroup
+  public Effectiveness effUnarmored
+  public Effectiveness effArmored
+  public Effectiveness effAir
+  public Single effectiveRange
+
+-- Properties --
+
+-- Methods --
+  public Boolean Equals(Object obj)
+  public Int32 GetHashCode()
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+  public String ToString()
+
+=== WeaponManager ===
+Base: MonoBehaviour
+
+-- Fields --
+  public List`1 weapons
+  private Int32 sequenceIndex
+  private KeyCode[] secretSequence
+  private KeyCode[] secretSequence2
+  public static WeaponManager instance
+  private static Int32 M22S7_HASH_INDEXER
+
+-- Properties --
+  Boolean useGUILayout { get; set; }
+  Boolean enabled { get; set; }
+  Boolean isActiveAndEnabled { get;  }
+  Transform transform { get;  }
+  GameObject gameObject { get;  }
+  String tag { get; set; }
+  String name { get; set; }
+  HideFlags hideFlags { get; set; }
+
+-- Methods --
+  private Void Awake()
+  public static List`1 GetWeaponEntriesOfSlot(WeaponSlot slot)
+  public static WeaponEntry EntryNamed(String name)
+  private Void Update()
+  private Void ShowAllWeapons()
+  public Void Invoke(String methodName, Single time)
+  public Void InvokeRepeating(String methodName, Single time, Single repeatRate)
+  public Void CancelInvoke()
+  public Void CancelInvoke(String methodName)
+  public Boolean IsInvoking(String methodName)
+  public Boolean IsInvoking()
+  public Coroutine StartCoroutine(IEnumerator routine)
+  public Coroutine StartCoroutine_Auto(IEnumerator routine)
+  public Coroutine StartCoroutine(String methodName, Object value)
+  public Coroutine StartCoroutine(String methodName)
+  public Void StopCoroutine(String methodName)
+  public Void StopCoroutine(IEnumerator routine)
+  public Void StopCoroutine(Coroutine routine)
+  protected Void StopCoroutineViaEnumerator_Auto(IEnumerator routine)
+  protected Void StopCoroutine_Auto(Coroutine routine)
+  public Void StopAllCoroutines()
+  public Component GetComponent(Type type)
+  protected Void GetComponentFastPath(Type type, IntPtr oneFurtherThanResultValue)
+  public T GetComponent()
+  public Component GetComponent(String type)
+  public Component GetComponentInChildren(Type t, Boolean includeInactive)
+  public Component GetComponentInChildren(Type t)
+  public T GetComponentInChildren()
+  public T GetComponentInChildren(Boolean includeInactive)
+  public Component[] GetComponentsInChildren(Type t)
+  public Component[] GetComponentsInChildren(Type t, Boolean includeInactive)
+  public T[] GetComponentsInChildren(Boolean includeInactive)
+  public Void GetComponentsInChildren(Boolean includeInactive, List`1 result)
+  public T[] GetComponentsInChildren()
+  public Void GetComponentsInChildren(List`1 results)
+  public Component GetComponentInParent(Type t)
+  public T GetComponentInParent()
+  public Component[] GetComponentsInParent(Type t)
+  public Component[] GetComponentsInParent(Type t, Boolean includeInactive)
+  public T[] GetComponentsInParent(Boolean includeInactive)
+  public Void GetComponentsInParent(Boolean includeInactive, List`1 results)
+  public T[] GetComponentsInParent()
+  public Component[] GetComponents(Type type)
+  public Void GetComponents(Type type, List`1 results)
+  public Void GetComponents(List`1 results)
+  public T[] GetComponents()
+  public Boolean CompareTag(String tag)
+  public Void SendMessageUpwards(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessageUpwards(String methodName, Object value)
+  public Void SendMessageUpwards(String methodName)
+  public Void SendMessageUpwards(String methodName, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value, SendMessageOptions options)
+  public Void SendMessage(String methodName, Object value)
+  public Void SendMessage(String methodName)
+  public Void SendMessage(String methodName, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter, SendMessageOptions options)
+  public Void BroadcastMessage(String methodName, Object parameter)
+  public Void BroadcastMessage(String methodName)
+  public Void BroadcastMessage(String methodName, SendMessageOptions options)
+  public String ToString()
+  public Int32 GetInstanceID()
+  public Int32 GetHashCode()
+  public Boolean Equals(Object o)
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+
+=== WeaponManager+WeaponEntry ===
+Base: Object
+
+-- Fields --
+  public String name
+  public Sprite image
+  public GameObject prefab
+  public WeaponSlot slot
+  public Boolean hidden
+
+-- Properties --
+
+-- Methods --
+  public Boolean Equals(Object obj)
+  public Int32 GetHashCode()
+  protected Void Finalize()
+  public Type GetType()
+  protected Object MemberwiseClone()
+  public String ToString()
+
+=== ALL WEAPON RELATED TYPES ===
+  AiActorController+<AiWeapon>c__Iterator9A
+  AlternatingMountedWeapon
+  ExplodingProjectile
+  GrenadeProjectile
+  MeleeWeapon
+  MountedCameraWeapon
+  MountedWeapon
+  Projectile
+  ScopedWeapon
+  ShellLoadedWeapon
+  ThrowableWeapon
+  Weapon
+  WeaponManager
+  WeaponManager+WeaponSlot
+  WeaponManager+WeaponEntry
+  WeaponManager+LoadoutSet
+  WeaponUser
+  WeaponPhotoShoot
+  LoadoutUi
